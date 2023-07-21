@@ -10,6 +10,7 @@ export default function Login() {
     const [emailError, setEmailError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false);
 
+    //Submit button checking if email and password have valid values, setting error if not
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
@@ -21,6 +22,7 @@ export default function Login() {
         }
     }
 
+    //onChange functions setting email and password values + clearing any existing errors
     const handleEmail = (e: any) => {
         SetEmail(e.target.value);
 
@@ -45,6 +47,7 @@ export default function Login() {
 
             <h2>Login</h2>
 
+            {/*Form component containing text fields + submit button*/}
             <Box
                 component="form"
                 noValidate
