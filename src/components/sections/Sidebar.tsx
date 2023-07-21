@@ -1,7 +1,9 @@
+import { Stack } from '@mui/material'
+
 export default function Sidebar() {
 	return (
-		<>
-			<p>Sidebar</p>
-		</>
+		<Stack>
+			<p>Sidebar contents go inside of here.</p>
+		</Stack>
 	);
 };
