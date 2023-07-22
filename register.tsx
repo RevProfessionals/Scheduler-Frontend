@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
 
 interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = () => {
-  const [email, setEmail] = useState("");
-  const [confirmEmail, setConfirmEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [confirmEmailError, setConfirmEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+  const [email, setEmail] = React.useState("");
+  const [confirmEmail, setConfirmEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [emailError, setEmailError] = React.useState(false);
+  const [confirmEmailError, setConfirmEmailError] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = React.useState(false);
 
   // Submit button checking if fields have valid values and match their confirm counterparts
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
