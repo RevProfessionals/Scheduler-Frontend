@@ -8,6 +8,7 @@ export default function Login(props:  any) {
     const [emailError, setEmailError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false);
 	const [loginError, setLoginError] = React.useState(false);
+	const [loginSuccess, setLoginSuccess] = React.useState(false);
 	const [loading, setLoading] = React.useState(false);
 
     // Submit button checking if email and password have valid values, setting error if not
@@ -30,11 +31,14 @@ export default function Login(props:  any) {
 
 		setLoading(true);
 		// Begin the login request.
-		await props.loginHandler({email, password});
-
+		let response = await props.loginHandler({email, password});
 		// Finish the login request.
-		setLoading(false);
-		setLoginError(true);
+		if(response.status == 200) {
+			setLoginSuccess(true);
+		} else {
+			setLoginError(true);
+			setLoading(false);
+		}
     }
 
     // onChange functions setting email and password values + clearing any existing errors
@@ -52,8 +56,8 @@ export default function Login(props:  any) {
     return (
         <Stack gap="2rem" padding="2rem" bgcolor="background.paper" boxShadow={3}>
             <Typography variant="h4" textAlign="center">Log in to your<br/>Cloudinary account</Typography>
-			<Grow in={loginError}>
-				<Alert severity="error">Cannot log in using the email and password combination.</Alert>
+			<Grow in={loginError || loginSuccess}>
+				<Alert severity={loginError ? "error" : "success"} sx={{ width: 450 }}>{loginError ? "Cannot log in using the email and password combination." : "Successfully logged in! Redirecting to the dashboard..."}</Alert>
 			</Grow>
             {/*Form component containing text fields + submit button*/}
             <Stack component="form" noValidate autoComplete="off" gap="1rem">
