@@ -1,9 +1,7 @@
 import React from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
 
-interface RegisterProps {}
-
-const Register: React.FC<RegisterProps> = () => {
+export default function Register() {
   const [email, setEmail] = React.useState("");
   const [confirmEmail, setConfirmEmail] = React.useState("");
   const [password, setPassword] = React.useState("");

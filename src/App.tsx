@@ -6,8 +6,7 @@ import Header from './components/sections/Header';
 import Sidebar from './components/sections/Sidebar';
 import Home from './components/home/Home';
 import Register from './components/home/Register';
-import EventScheduler from './components/home/EventScheduler';
-
+import EventScheduler from './components/events/EventScheduler';
 
 const url = "http://localhost:8080"
 
@@ -44,6 +43,7 @@ export default function App() {
 					<Routes>
 						<Route path="/" element={<Home loginHandler={login} />} />
 						<Route path="/register" element={<Register />} />
+						<Route path="/dashboard" element={<EventScheduler />} />
 					</Routes>
 				</Stack>
 			</Stack>

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Event } from './types';
 
 const EventScheduler: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<any>([]);
   const [selectedDate, setSelectedDate] = useState('');
-  const [newEvent, setNewEvent] = useState<Event>({
+  const [newEvent, setNewEvent] = useState({
     id: 1,
     title: '',
     date: '',
