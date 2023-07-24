@@ -1,127 +1,128 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import { Container, Box, TextField, Button } from "@mui/material";
 
-function RegistrationPageDemo() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      username: data.get("username"),
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+interface RegisterProps {}
+
+const Register: React.FC<RegisterProps> = () => {
+  const [email, setEmail] = React.useState("");
+  const [confirmEmail, setConfirmEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [emailError, setEmailError] = React.useState(false);
+  const [confirmEmailError, setConfirmEmailError] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = React.useState(false);
+
+  
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (email === "" || email === null) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+
+    if (confirmEmail === "" || confirmEmail !== email) {
+      setConfirmEmailError(true);
+    } else {
+      setConfirmEmailError(false);
+    }
+
+    if (password === "" || password === null) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+
+    if (confirmPassword === "" || confirmPassword !== password) {
+      setConfirmPasswordError(true);
+    } else {
+      setConfirmPasswordError(false);
+    }
+  };
+
+  
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    setConfirmEmailError(false); 
+  };
+
+  const handleConfirmEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmEmail(e.target.value);
+    setEmailError(false); 
+  };
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    setConfirmPasswordError(false); 
+  };
+
+  const handleConfirmPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
+    setPasswordError(false); 
   };
 
   return (
-    <ThemeProvider theme={createTheme()}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                {/* Username TextField */}
-                <TextField
-                  required
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  name="username"
-                  autoComplete="username"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
-            </Grid>
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+      }}
+    >
+      <h2>Register</h2>
+
+  
+      <Box
+        component="form"
+        noValidate
+        autoComplete="off"
+        sx={{ display: "flex", flexDirection: "column", gap: "1em" }}
+      >
+        <TextField
+          error={emailError}
+          type="email"
+          label="Email"
+          placeholder="Enter your email address"
+          helperText={emailError ? "Incorrect email!" : ""}
+          size="small"
+          onChange={handleEmail}
+        />
+        <TextField
+          error={confirmEmailError}
+          type="email"
+          label="Confirm Email"
+          placeholder="Confirm your email address"
+          helperText={confirmEmailError ? "Emails do not match!" : ""}
+          size="small"
+          onChange={handleConfirmEmail}
+        />
+        <TextField
+          error={passwordError}
+          type="password"
+          label="Password"
+          placeholder="Enter your password"
+          helperText={passwordError ? "Incorrect password!" : ""}
+          size="small"
+          onChange={handlePassword}
+        />
+        <TextField
+          error={confirmPasswordError}
+          type="password"
+          label="Confirm Password"
+          placeholder="Confirm your password"
+          helperText={confirmPasswordError ? "Passwords do not match!" : ""}
+          size="small"
+          onChange={handleConfirmPassword}
+        />
+
+        <Button type="submit" onClick={handleSubmit}>
+          Register
+        </Button>
+      </Box>
+    </Container>
   );
-}
-
-export default RegistrationPageDemo;
-
+};

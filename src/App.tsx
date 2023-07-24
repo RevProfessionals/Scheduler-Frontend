@@ -4,6 +4,8 @@ import Header from './components/sections/Header';
 import Sidebar from './components/sections/Sidebar';
 import Home from './components/home/Home';
 import Register from './components/home/Register';
+import EventScheduler from './components/home/EventScheduler';
+
 
 function sleep(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
