@@ -72,13 +72,13 @@ const EventScheduler: React.FC = () => {
         {events.map((event) => (
           <div key={event.id} style={styles.eventItem}>
             <div style={styles.column}>
-            <div dangerouslySetInnerHTML={{ __html: event.title }} />
+              <strong>Title:</strong> {event.title}
             </div>
             <div style={styles.column}>
-            <div dangerouslySetInnerHTML={{ __html: event.date }} />
+              <strong>Date:</strong> {event.date}
             </div>
             <div style={styles.column}>
-            <div dangerouslySetInnerHTML={{ __html: event.time }} />
+              <strong>Time:</strong> {event.time}
             </div>
           </div>
         ))}
