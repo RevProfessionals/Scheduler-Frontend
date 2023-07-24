@@ -1,9 +1,10 @@
 import Login from './Login';
+import GoogleSearch from '../api/GoogleSearchAPI';
 
-export default function Home() {
+export default function Home(props: any) {
 	return (
 		<>
-			<Login />
+			<Login loginHandler={props.loginHandler} />
 		</>
 	);
 };
