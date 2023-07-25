@@ -1,32 +1,56 @@
 import React, { useState } from 'react';
+import { Event } from './types';
 
 const EventScheduler: React.FC = () => {
-  const [events, setEvents] = useState<any>([]);
-  const [selectedDate, setSelectedDate] = useState('');
-  const [newEvent, setNewEvent] = useState({
+  const [events, setEvents] = useState<Event[]>([]);
+  const [newEvent, setNewEvent] = useState<Event>({
     id: 1,
     title: '',
-    date: '',
-    time: '',
+    startDate: '',
+    endDate: '',
+    startTime: '',
+    endTime: '',
   });
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewEvent({ ...newEvent, title: event.target.value });
   };
 
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedDate(event.target.value);
-    setNewEvent({ ...newEvent, date: event.target.value });
+  const handleStartDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEvent({ ...newEvent, startDate: event.target.value });
   };
 
-  const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewEvent({ ...newEvent, time: event.target.value });
+  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEvent({ ...newEvent, endDate: event.target.value });
   };
+
+  const handleStartTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEvent({ ...newEvent, startTime: event.target.value });
+  };
+ 
+  const handleEndTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewEvent({ ...newEvent, endTime: event.target.value });
+  };
+ 
 
   const handleAddEvent = () => {
-    if (newEvent.title && newEvent.date && newEvent.time) {
+    if (
+      newEvent.title &&
+      newEvent.startDate &&
+      newEvent.endDate &&
+      newEvent.startTime &&
+      newEvent.endTime
+    ) {
       setEvents([...events, newEvent]);
-      setNewEvent({ ...newEvent, id: newEvent.id + 1, title: '', date: '', time: '' });
+      setNewEvent({
+        ...newEvent,
+        id: newEvent.id + 1,
+        title: '',
+        startDate: '',
+        endDate: '',
+        startTime: '',
+        endTime: '',
+      });
     }
   };
 
@@ -45,20 +69,38 @@ const EventScheduler: React.FC = () => {
         />
         </div>
         <div style={styles.inputColumn}>
-          <label>Date:</label>
+          <label>Start Date:</label>
         <input
           type="date"
-          value={selectedDate}
-          onChange={handleDateChange}
+          value={newEvent.startDate}
+          onChange={handleStartDateChange}
           style={styles.input}
         />
         </div>
         <div style={styles.inputColumn}>
-          <label>Time:</label>
+          <label>End Date:</label>
+          <input
+          type="date"
+          value={newEvent.endDate}
+          onChange={handleEndDateChange}
+          style={styles.input}
+        />
+        </div>
+        <div style={styles.inputColumn}>
+          <label>Start Time:</label>
         <input
           type="time"
-          value={newEvent.time}
-          onChange={handleTimeChange}
+          value={newEvent.startTime}
+          onChange={handleStartTimeChange}
+          style={styles.input}
+        />
+        </div>
+        <div style={styles.inputColumn}>
+          <label>End Time:</label>
+          <input
+          type="time"
+          value={newEvent.endTime}
+          onChange={handleEndTimeChange}
           style={styles.input}
         />
         </div>
@@ -74,10 +116,16 @@ const EventScheduler: React.FC = () => {
               <strong>Title:</strong> {event.title}
             </div>
             <div style={styles.column}>
-              <strong>Date:</strong> {event.date}
+              <strong>Start Date:</strong> {event.startDate}
             </div>
             <div style={styles.column}>
-              <strong>Time:</strong> {event.time}
+              <strong>End Date:</strong> {event.endDate}
+            </div>
+            <div style={styles.column}>
+              <strong>Start Time:</strong> {event.startTime}
+            </div>
+            <div style={styles.column}>
+              <strong>End Time:</strong> {event.endTime}
             </div>
           </div>
         ))}
@@ -139,11 +187,11 @@ const styles = {
     borderRadius: '4px',
     marginBottom: '10px',
   },
-  inputContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '5px',
-  },
+  //inputContainer: {
+    //display: 'flex',
+    //alignItems: 'center',
+    //gap: '5px',
+  //},
 };
 
 export default EventScheduler;
