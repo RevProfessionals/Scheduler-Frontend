@@ -3,7 +3,6 @@ import { Event } from './types';
 
 const EventScheduler: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [selectedDate, setSelectedDate] = useState('');
   const [newEvent, setNewEvent] = useState<Event>({
     id: 1,
     title: '',
