@@ -1,7 +1,10 @@
 export interface Event {
     id: number;
     title: string;
-    time: string; 
+    startDate: string;
+    endDate: string;
+    startTime: string; 
+    endTime: string;
   }
   
   export interface Day {
