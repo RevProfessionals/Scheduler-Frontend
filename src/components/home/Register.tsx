@@ -126,5 +126,3 @@ const Register: React.FC<RegisterProps> = () => {
     </Container>
   );
 };
-
-export default Register;
